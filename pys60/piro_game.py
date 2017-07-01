@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# shebang dihilangkan agar tidak error saat dijalankan dengan termux
 
 #
 # Nama         : PiroGames
