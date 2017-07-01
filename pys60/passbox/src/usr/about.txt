@@ -1,0 +1,29 @@
+TENTANG
+
+Nama Program    : PassBox (Password Box)
+Versi Program   : 0.2
+Oleh            : cupucupu
+Email           : desktop.hobbie@gmail.com
+Blog            : http://desktop-hobbie.blogspot.com
+Program Home    : http://pages.google.com/page/cuputoyz/pub/passbox
+
+PassBox adalah sebuah program sederhana yang dibuat menggunakan
+bahasa pemrograman Python For S60 (PyS60) yang (untuk saat ini)
+hanya bisa dijalankan pada ponsel-ponsel pintar yang telah
+terinstall interpreter PyS60 didalamnya.
+
+Fungsi utama PassBox adalah untuk membantu menyimpan /menjaga 
+catatan akun yang kita miliki. Karena fungsi utamanya hanya 
+untuk mencatat, maka fasilitas yang terdapat didalamnya juga
+sangat sederhana.
+
+Untuk informasi lebih lanjut, silahkan kunjungi:
+    http://pages.google.com/page/cuputoys/passbox
+
+Disini Anda bisa mendapatkan bantuan untuk instalasi,
+petujuk, tips dan trik dan juga kode program.
+
+Laporan kesalahan/ fungsi program bisa dikirim ke
+    desktop.hobbie@gmail.com
+
+
