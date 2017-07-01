@@ -1,0 +1,20 @@
+CATATAN LOG
+
+ABSTRAK
+Catatan log adalah sebuah laporan aktifitas yang dilakukan oleh sistem atau program tertentu. Catatan log sangat berguna untuk mengetahui kondisi sistem atau aplikasi yang kita gunakan karena biasanya catatan log berisi tentang  laporan atau sebab sebuah sistem mengalami gangguan.
+
+DAFTAR ISI:
+- Melihat Catatan Log
+- Menghapus Catatan Log
+
+MELIHAT CATATAN LOG
+Untuk melihat aktifitas terakhir yang terekam oleh program, pilih menu [Pengaturan] dan pilih [Lihat Log]. Disini Anda akan diperlihatkan aktifitas terakhir yang terjadi sebelum pembersihan log dijalankan.
+
+MENGHAPUS CATATAN LOG
+Untuk menghapus catatan log, pilih menu [Pengaturan] dan pilih [Hapus Log]
+
+INFO:
+Secara otomatis, catatan log akan dibersihkan setiap awal bulan :D
+
+Dokumen oleh: cupucupu <desktop.hobbie@gmail.com>
+
