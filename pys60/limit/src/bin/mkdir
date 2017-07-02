@@ -1,0 +1,47 @@
+#
+# mkdir simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+MKDIRRN = open("%s\\var\\run\\cmd.run"%ROOT, "r")
+MKDIRGN = MKDIRRN.read().split("^")
+MKDIRRN.close()
+
+MKDIRGN.pop(0)
+MKDIRGN.pop(len(MKDIRGN) - 1)
+
+if len(MKDIRGN) == 1:
+    LimitPrint.add(u"mkdir: missing operand\nTry `man mkdir' for more information.")
+    LimitConsole()
+else:
+    MKDIRNewDir = len(MKDIRGN) - 1
+    MKDIRLoop = 1
+    while MKDIRLoop <= MKDIRNewDir:
+        if MKDIRGN[MKDIRLoop].startswith("'") or MKDIRGN[MKDIRLoop].startswith('"'):
+            MKDIRMerge=''
+            while MKDIRLoop <= MKDIRNewDir:
+                if MKDIRGN[MKDIRLoop].startswith("'") or MKDIRGN[MKDIRLoop].startswith('"'):
+                    MKDIRMerge+="%s "%MKDIRGN[MKDIRLoop][1:]
+                elif MKDIRGN[MKDIRLoop].endswith("'") or MKDIRGN[MKDIRLoop].endswith('"'):
+                    MKDIRMerge+="%s"%MKDIRGN[MKDIRLoop][:-1]
+                    break
+                else:
+                    MKDIRMerge+="%s "%MKDIRGN[MKDIRLoop]
+                MKDIRLoop+=1
+            if os.path.exists("%s%s"%(os.getcwd(),MKDIRMerge)):
+                LimitPrint.add(u"mkdir: cannot create director `%s': File exists\n"%MKDIRMerge)
+            else:
+                os.mkdir("%s%s"%(os.getcwd(),MKDIRMerge))
+        elif os.path.exists("%s%s"%(os.getcwd(),MKDIRGN[MKDIRLoop])):
+            LimitPrint.add(u"mkdir: cannot create directory `%s': File exists\n"%MKDIRGN[MKDIRLoop])
+        else:
+            os.mkdir("%s%s"%(os.getcwd(),MKDIRGN[MKDIRLoop]))
+        MKDIRLoop += 1
+    LimitPrint.delete(LimitPrint.len() - 1, LimitPrint.len())
+    LimitConsole()
+
+
+

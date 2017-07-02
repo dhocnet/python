@@ -1,0 +1,12 @@
+#
+# clear simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+
+appuifw.app.body.clear()
+LimitConsole()
+

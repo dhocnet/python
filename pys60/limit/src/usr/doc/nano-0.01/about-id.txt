@@ -1,0 +1,17 @@
+nano simulation v0.01 beta
+
+nano simulation. Sebuah program
+tiruan dari program yang berjalan
+pada unix.
+
+Berfungsi untuk membuat dan merubah
+file teks.
+
+Informasi untuk program nano, 
+silahkan merujuk pada halaman berikut:
+http://www.nano-editor.org/
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 feb 2011
+

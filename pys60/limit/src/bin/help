@@ -1,0 +1,37 @@
+#
+# help simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+HELPTop = open("%s\\usr\\share\\help\\help.txt"%ROOT,'r')
+HELPRead = HELPTop.read()
+HELPTop.close()
+
+HELPMode = open("%s\\var\\run\\cmd.run"%ROOT,'r')
+HELPCmd = HELPMode.read().split('^')
+HELPMode.close()
+
+HELPCmd.pop(0)
+HELPCmd.pop(len(HELPCmd)-1)
+
+if len(HELPCmd) == 1:
+    LimitPrint.add(u"%s"%HELPRead)
+    LimitConsole()
+else:
+    if HELPCmd[1] == "--less":
+        HELPChr = len(HELPRead) -1
+        HELPLoop = 0
+        while HELPLoop <= HELPChr:
+            LimitPrint.add(u"%s"%HELPRead[HELPLoop])
+            e32.ao_sleep(0.1)
+            HELPLoop += 1
+        LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+        LimitConsole()
+    else:
+        LimitPrint.add(u"-bash: help: %s: invalid option"%HELPCmd[1])
+        LimitPrint.add(u"\nhelp: usage: `help' or `help --less'")
+        LimitConsole()
+        

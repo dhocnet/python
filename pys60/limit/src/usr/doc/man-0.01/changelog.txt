@@ -1,0 +1,3 @@
+man simulation version 0.01
+-- diterbitkan pada Feb 2011
+

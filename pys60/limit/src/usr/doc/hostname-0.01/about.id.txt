@@ -1,0 +1,20 @@
+hostname simulation v0.01 beta
+
+hostname pada perintah unix sesungguhnya
+digunakan untuk menampilkan dan merubah
+nama host atau komputer. Dan hostname
+simulation adalah program tiruan-nya
+yang dibuat untuk Limit.
+
+hostname simulation untuk limit
+hanya dapat digunakan untuk melihat
+nama host atau komputer saja.
+
+Informasi untuk perintah hostname pada Unix,
+silahkan merujuk pada halaman berikut:
+http://www.gnu.org/software/coreutils/manual/html_node/hostname-invocation.html
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 feb 2011
+

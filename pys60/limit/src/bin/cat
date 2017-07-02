@@ -1,0 +1,72 @@
+#
+# cat simulation v0.01 beta
+#
+# oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+# membaca parameter perintah yang diberikan
+CATReadFiles = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+CATGetFiles = CATReadFiles.read().split("^")
+CATReadFiles.close()
+
+CATGetFiles.pop(0)
+CATGetFiles.pop(len(CATGetFiles) - 1)
+
+if len(CATGetFiles) == 1:
+    LimitPrint.add(u"cat: missing operand\nTry `man cat' for more information")
+    LimitConsole()
+else:
+    CATQueue = len(CATGetFiles) - 1
+    CATLoop = 1
+    CATList=0
+    CATItems=[]
+    while CATLoop <= CATQueue:
+        if CATGetFiles[CATLoop].startswith('"') or CATGetFiles[CATLoop].startswith("'"):
+            CATMerge=''
+            while CATLoop <= CATQueue:
+                if CATGetFiles[CATLoop].startswith('"') or CATGetFiles[CATLoop].startswith("'"):
+                    CATMerge+="%s "%CATGetFiles[CATLoop][1:]
+                elif CATGetFiles[CATLoop].endswith('"') or CATGetFiles[CATLoop].endswith("'"):
+                    CATMerge+="%s"%CATGetFiles[CATLoop][:-1]
+                    CATItems.append(u"%s"%CATMerge)
+                    CATMerge=''
+                    break
+                else:
+                    CATMerge+="%s "%CATGetFiles[CATLoop]
+                CATLoop+=1
+            CATList+=1
+            try:
+                if os.path.exists("%s%s"%(os.getcwd(),CATItems[CATList-1])) and not os.path.isdir("%s%s"%(os.getcwd(),CATItems[CATList-1])):
+                    CATfile=open("%s%s"%(os.getcwd(),CATItems[CATList-1]),"rb")
+                    CATfiles = CATfile.read()
+                    CATfile.close()
+                    LimitPrint.add(u"%s\n"%CATfiles)
+                elif os.path.exists("%s%s"%(os.getcwd(),CATItems[CATList-1])) and os.path.isdir("%s%s"%(os.getcwd(),CATItems[CATList-1])):
+                    LimitPrint.add(u"cat: %s: Is a directory\n"%CATItems[CATList-1])
+                else:
+                    LimitPrint.add(u"cat: %s: No such file or directory\n"%CATItems[CATList-1])
+            except:
+                LimitPrint.color = Red
+                LimitPrint.add(u"cat: error reading file `%s': %s\n"%(CATItems[CATList-1],sys.stderr))
+                LimitPrint.color=Gray
+        else:
+            try:
+                if os.path.exists("%s%s"%(os.getcwd(),CATGetFiles[CATLoop])) and not os.path.isdir("%s%s"%(os.getcwd(),CATGetFiles[CATLoop])):
+                    CATfile = open("%s%s"%(os.getcwd(),CATGetFiles[CATLoop]), "rb")
+                    CATfiles = CATfile.read()
+                    CATfile.close()
+                    LimitPrint.add(u"%s\n"%str(CATfiles))
+                elif os.path.exists("%s%s"%(os.getcwd(),CATGetFiles[CATLoop])) and os.path.isdir("%s%s"%(os.getcwd(),CATGetFiles[CATLoop])):
+                    LimitPrint.add(u"cat: %s: Is a directory\n"%CATGetFiles[CATLoop])
+                else:
+                    LimitPrint.add(u"cat: %s: No such file or directory\n"%CATGetFiles[CATLoop])
+            except:
+                LimitPrint.color=Red
+                LimitPrint.add(u"cat: error: %s\n"%str(sys.stderr))
+                LimitPrint.color=Gray
+        CATLoop += 1
+    LimitPrint.delete(LimitPrint.len() - 1, LimitPrint.len())
+    LimitConsole()
+    

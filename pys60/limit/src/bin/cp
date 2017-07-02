@@ -1,0 +1,72 @@
+#
+# cp simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+CPReadParam = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+CPGetParam = CPReadParam.read().split("^")
+CPReadParam.close()
+
+CPGetParam.pop(0)
+CPGetParam.pop(len(CPGetParam)-1)
+
+def CPBack():
+    LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+    LimitConsole()
+
+if len(CPGetParam) == 1:
+    LimitPrint.add(u"cp: missing file operand\nTry `man cp' for more information")
+    LimitConsole()
+elif len(CPGetParam) == 2:
+    LimitPrint.add(u"cp: missing destination operand after `%s'\nTry `man cp' for more information"%CPGetParam[1])
+    LimitConsole()
+else:
+    CPItem=[]
+    CPLen=len(CPGetParam)-1
+    CPLoop=1
+    while CPLoop <= CPLen:
+        if CPGetParam[CPLoop].startswith("'") or CPGetParam[CPLoop].startswith('"'):
+            CPMerge=''
+            while CPLoop <= CPLen:
+                if CPGetParam[CPLoop].startswith("'") or CPGetParam[CPLoop].startswith('"'):
+                    CPMerge+="%s "%CPGetParam[CPLoop][1:]
+                elif CPGetParam[CPLoop].endswith("'") or CPGetParam[CPLoop].endswith('"'):
+                    CPMerge+="%s"%CPGetParam[CPLoop][:-1]
+                    break
+                else:
+                    CPMerge+="%s "%CPGetParam[CPLoop]
+                CPLoop+=1
+            CPItem.append("%s"%CPMerge)
+        else:
+            CPItem.append("%s"%CPGetParam[CPLoop])
+        CPLoop+=1
+    if len(CPItem) == 1:
+        LimitPrint.add(u"cp: missing destination file operand after `%s'\nTry `man cp' for more information"%CPItem[0])
+        LimitConsole()
+    else:
+        if os.path.exists("%s%s"%(os.getcwd(),CPItem[0])) and not os.path.isdir("%s%s"%(os.getcwd(),CPItem[0])):
+            if os.path.exists("%s%s"%(os.getcwd(),CPItem[1])) and not os.path.isdir("%s%s"%(os.getcwd(),CPItem[1])):
+                if CPItem[0] == CPItem[1]:
+                    LimitPrint.add(u"cp: `%s' and `%s' are the same file"%(CPItem[0],CPItem[1]))
+                    LimitConsole()
+            elif os.path.exists("%s%s"%(os.getcwd(),CPItem[1])) and os.path.isdir("%s%s"%(os.getcwd(),CPItem[1])):
+                if not os.path.exists("%s%s\\%s"%(os.getcwd(),CPItem[1],CPItem[0])) :
+                    e32.file_copy("%s%s\\%s"%(os.getcwd(),CPItem[1],CPItem[0]),"%s%s"%(os.getcwd(),CPItem[0]))
+                    CPBack()
+                else:
+                    CPBack()
+            else:
+                e32.file_copy("%s%s"%(os.getcwd(),CPItem[1]),"%s%s"%(os.getcwd(),CPItem[0]))
+                CPBack()
+        elif os.path.exists("%s%s"%(os.getcwd(),CPItem[0])) and os.path.isdir("%s%s"%(os.getcwd(),CPItem[0])):
+            LimitPrint.add(u"cp: omitting directory `%s'"%CPItem[0])
+            LimitConsole()
+        else:
+            e32.file_copy("%s%s"%(os.getcwd(),CPItem[1]),"%s%s"%(os.getcwd(),CPItem[0]))
+            CPBack()
+            
+            
+            

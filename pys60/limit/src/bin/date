@@ -1,0 +1,28 @@
+#
+# date simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+import time
+
+dateDay=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"]
+dateMoon=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Des"]
+
+dateTime=time.time()
+dateLocal=time.localtime(dateTime)
+
+datePrint="%s %s %s %s:%s:%s %s"%(dateDay[dateLocal.tm_wday],
+                                  dateMoon[dateLocal.tm_mon],
+                                  dateLocal.tm_mday,
+                                  dateLocal.tm_hour,
+                                  dateLocal.tm_min,
+                                  dateLocal.tm_sec,
+                                  dateLocal.tm_year)
+
+LimitPrint.add(u"%s"%datePrint)
+
+LimitConsole()
+

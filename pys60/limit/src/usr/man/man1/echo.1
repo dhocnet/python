@@ -1,0 +1,90 @@
+.TH echo 1 Feb-24-2011 cupucupu
+.SH NAME
+.IP
+echo - Display a line of text
+.PP
+.SH SYNOPSIS
+.IP
+echo string
+.BR
+.IP
+echo string1 string2
+.PP
+.SH DESCRIPTIONS
+.IP
+Print a line of text to terminal screen.
+.PP
+.SH OPTIONS
+.IP
+echo simulation version 0.01 come with no options.
+.PP
+.SH EXAMPLE
+.IP
+.B echo
+.I some text
+- will print string "
+.I some text
+" to the screen.
+.PP
+.IP
+If you want to save a line of text to some file, you can use symbol "
+.B >
+" to do that.
+.PP
+.IP
+.B echo
+.I text1 text2
+.B >
+.I newfile
+.PP
+.IP
+That command will make a new file with name
+.I newfile
+and write the
+.I text1 text2
+into them.
+.PP
+.IP
+.B WARNING!
+.BR
+.IP
+.IP
+.I THE SYMBOL "
+.B >
+.I " WILL REPLACED THE FILE IF EXISTS.
+.PP
+.IP
+Or if you want to add some text to the existing file, you can use the "
+.B >>
+" symbol to do that.
+.PP
+.IP
+.B echo
+.I newtext1 newtext2
+.B >
+.I existingfile
+.PP
+.SH BUGS
+.IP
+Only text file is supported by echo simulation 0.01
+.PP
+.SH AUTHOR
+.IP
+cupucupu <
+.I cupu.cupuh@yahoo.co.id
+>
+.PP
+.IP
+.B Original author:
+.BR
+.IP
+.IP
+Brian Fox
+.BR
+.IP
+.IP
+Chet Ramey
+.PP
+.SH SEE ALSO
+.IP
+-

@@ -1,0 +1,19 @@
+md5sum simulation v0.01 beta
+
+Pada unix, digunakan untuk mem-ferifiasi
+suatu file. Apakah isi file telah berubah
+atau tidak.
+
+md5sum simulation digunakan untuk hal
+yang sama pada limit tetapi hanya memiliki
+fungsi dasar saja.
+
+Informasi untuk perintah md5sum pada unix
+silahkan merujuk pada halaman berikut:
+http://www.gnu.org/software/coreutils/manual/html_node/md5sum-invocation.html
+http://en.wikipedia.org/wiki/Md5sum
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 feb 2011
+

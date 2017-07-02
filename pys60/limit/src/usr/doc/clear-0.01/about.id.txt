@@ -1,0 +1,18 @@
+clear simulation v0.01 beta
+
+clear simulation adalah program
+tiruan dari perintah clear yang
+terdapat pada unix-like.
+
+Dibuat agar dapat berjalan pada
+Limit.
+
+Informasi untuk perintah clear pada
+Unix, silahkan merujuk pada halaman
+berikut:
+http://en.wikipedia.org/wiki/Clear_(Unix)
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 februari 2011
+

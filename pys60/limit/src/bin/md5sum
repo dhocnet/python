@@ -1,0 +1,66 @@
+#
+# md5sum simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+import md5
+
+MD5Obj = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+MD5File = MD5Obj.read().split("^")
+MD5Obj.close()
+
+MD5File.pop(0)
+MD5File.pop(len(MD5File)-1)
+
+if len(MD5File) == 1:
+    LimitPrint.add(u"md5sum: missing operand\nTry `man md5sum' for more information")
+    LimitConsole()
+else:
+    MD5sum = len(MD5File)-1
+    MD5Loop = 1
+    while MD5Loop <= MD5sum:
+        if MD5File[MD5Loop].startswith("'") or MD5File[MD5Loop].startswith('"'):
+            MD5Merge = ''
+            while MD5Loop <= MD5sum:
+                if MD5File[MD5Loop].startswith("'") or MD5File[MD5Loop].startswith('"'):
+                    MD5Merge+="%s "%MD5File[MD5Loop][1:]
+                elif MD5File[MD5Loop].endswith("'") or MD5File[MD5Loop].endswith('"'):
+                    MD5Merge+="%s"%MD5File[MD5Loop][:-1]
+                    break
+                else:
+                    MD5Merge+="%s "%MD5File[MD5Loop]
+                MD5Loop+=1
+            if os.path.exists("%s%s"%(os.getcwd(),MD5Merge)) and not os.path.isdir("%s%s"%(os.getcwd(),MD5Merge)):
+                try:
+                    MD5Read = open("%s%s"%(os.getcwd(),MD5Merge),'rb')
+                    MD5Get = MD5Read.read()
+                    MD5Read.close()
+                    MD5Val = md5.new(u"%s"%MD5Get).hexdigest()
+                    LimitPrint.add(u"%s %s\n"(MD5Val,MD5Merge))
+                except:
+                    LimitPrint.add(u"md5sum: error: %s\n"%sys.stderr)
+            elif os.path.exists("%s%s"%(os.getcwd(),MD5Merge)) and os.path.isdir("%s%s"%(os.getcwd(),MD5Merge)):
+                LimitPrint.add(u"md5sum: %s: Is a directory\n"%MD5Merge)
+            else:
+                LimitPrint.add(u"md5sum: %s: No such file or directory\n"%MD5Merge)
+        elif os.path.exists("%s%s"%(os.getcwd(),MD5File[MD5Loop])) and not os.path.isdir("%s%s"%(os.getcwd(),MD5File[MD5Loop])):
+            try:
+                MD5Read = open("%s%s"%(os.getcwd(),MD5File[MD5Loop]),"rb")
+                MD5Get = MD5Read.read()
+                MD5Read.close()
+                MD5Val = md5.new(u"%s"%MD5Get).hexdigest()
+                LimitPrint.add(u"%s %s\n"%(MD5Val,MD5File[MD5Loop]))
+            except:
+                LimitPrint.add(u"md5sum: error: %s\n"%sys.stderr)
+        elif os.path.exists("%s%s"%(os.getcwd(),MD5File[MD5Loop])) and os.path.isdir("%s%s"%(os.getcwd(),MD5File[MD5Loop])):
+            LimitPrint.add(u"md5sum: %s: Is a directory\n"%MD5File[MD5Loop])
+        else:
+            LimitPrint.add(u"md5sum: %s: No such file or directory\n"%MD5File[MD5Loop])
+        MD5Loop += 1
+    LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+    del md5
+    LimitConsole()
+    

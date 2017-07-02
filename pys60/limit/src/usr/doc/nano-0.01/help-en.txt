@@ -1,0 +1,14 @@
+Help for nano simulation v0.01 beta
+
+Nano main view is the work area. That is where you can start creating the document.
+
+Nano menu:
+    Save: by selecting this menu, you can save new documents you create.
+    Help: this menu display the page you are reading now.
+    About: this menu contains a description of the nano.
+    Quit: quit from nano.
+
+By: cupucupu <cupu.cupuh@yahoo.co.id>
+Translation by Google <http://translate.google.com>
+
+Feb 18 2011

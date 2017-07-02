@@ -1,0 +1,20 @@
+pwd simulation v0.01 beta
+
+pwd simulation adalah perintah
+tiruan dari perintah pwd yang
+terdapat pada unix.
+
+pwd simulation akan menampilkan
+lokasi aktif atau lokasi saat
+perintah pwd dijalankan.
+
+Informasi untuk perintah pwd
+pada unix silahkan merujuk
+pada halaman berikut:
+http://www.gnu.org/software/coreutils/manual/html_node/pwd-invocation.html
+http://en.wikipedia.org/wiki/Pwd
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 feb 2011
+

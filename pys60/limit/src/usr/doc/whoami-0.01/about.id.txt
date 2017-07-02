@@ -1,0 +1,17 @@
+whoami simulation v0.01 beta
+
+whoami. Menampilkan informasi user.
+Sebuah perintah tiruan dari
+perintah pada unix yang dibuat
+untuk limit.
+
+Informasi untuk perintah
+whoami pada unix silahkan
+merujuk pada halaman berikut:
+http://www.gnu.org/software/coreutils/manual/html_node/whoami-invocation.html
+http://en.wikipedia.org/wiki/Whoami_(command)
+
+Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 feb 2011
+

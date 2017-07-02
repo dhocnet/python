@@ -1,0 +1,71 @@
+#
+# cd simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+def CDDelEndLine():
+    LimitPrint.delete(LimitPrint.len() - 1, LimitPrint.len())
+    LimitConsole()
+
+CDREADPARAM = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+CDGETParam = CDREADPARAM.read()
+CDREADPARAM.close()
+
+CDCkCmd = CDGETParam[:len(PROMPTS)]
+CDCkCmdSpc = CDCkCmd.replace(u"^",u" ")
+CDGETPARAM2 = "%s%s"%(CDCkCmdSpc,CDGETParam[len(PROMPTS)-1:])
+
+CDGETPARAM = CDGETPARAM2.split("^")
+
+
+CDGETPARAM.pop(0)
+CDGETPARAM.pop(len(CDGETPARAM) - 1)
+
+if len(CDGETPARAM) == 1 or len(CDGETPARAM) == 2 and CDGETPARAM[1] == "~" or len(CDGETPARAM) == 2 and CDGETPARAM[1] == "HOME":
+    os.chdir("%s\\%s"%(ROOT,whoami))
+    CDDelEndLine()
+else:
+    if CDGETPARAM[1].startswith('"') or CDGETPARAM[1].startswith("'"):
+        CDPart = ''
+        CDLinePart = len(CDGETPARAM)-1
+        CDLoop = 1
+        while CDLoop <= CDLinePart:
+            if CDGETPARAM[CDLoop].startswith("'") or CDGETPARAM[CDLoop].startswith('"'):
+                CDPart+="%s "%CDGETPARAM[CDLoop][1:]
+            elif CDGETPARAM[CDLoop].endswith("'") or CDGETPARAM[CDLoop].endswith('"'):
+                CDPart+="%s"%CDGETPARAM[CDLoop][:-1]
+                break
+            else:
+                CDPart+="%s "%CDGETPARAM[CDLoop]
+            CDLoop+=1
+        if os.path.exists("%s%s"%(os.getcwd(),CDPart)) and os.path.isdir("%s%s"%(os.getcwd(),CDPart)):
+            os.chdir("%s%s"%(os.getcwd(),CDPart))
+            CDDelEndLine()
+        elif os.path.exists("%s%s"%(os.getcwd(),CDPart)) and not os.path.isdir("%s%s"%(os.getcwd(),CDPart)):
+            LimitPrint.add(u"-bash: cd: %s: Not a directory\n"%CDPart)
+            CDDelEndLine()
+        else:
+            LimitPrint.add(u"-bash: cd: %s: No such file or directory\n"%CDPart)
+            CDDelEndLine()
+    elif os.path.exists("%s%s"%(os.getcwd(),CDGETPARAM[1])) and os.path.isdir("%s%s"%(os.getcwd(),CDGETPARAM[1])):
+        if CDGETPARAM[1] == "..":
+            if os.getcwd()[:-1] == ROOT:
+                LimitPrint.add(u"-bash: cd: %s: No such file or directory\n"%CDGETPARAM[1])
+                CDDelEndLine()
+            else:
+                os.chdir("%s%s"%(os.getcwd(),CDGETPARAM[1]))
+                CDDelEndLine()
+        else:
+            os.chdir("%s%s"%(os.getcwd(),CDGETPARAM[1]))
+            CDDelEndLine()
+    elif os.path.exists("%s%s"%(os.getcwd(),CDGETPARAM[1])) and not os.path.isdir("%s%s"%(os.getcwd(),CDGETPARAM[1])):
+        LimitPrint.add(u"-bash: cd: %s: Not a directory\n"%CDGETPARAM[1])
+        CDDelEndLine()
+    else:
+        LimitPrint.add(u"-bash: cd: %s: No such file or directory\n"%CDGETPARAM[1])
+        CDDelEndLine()
+        
+        

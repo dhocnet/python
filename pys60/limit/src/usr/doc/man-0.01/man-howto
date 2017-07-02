@@ -1,0 +1,88 @@
+man simulation howto v0.01
+
+# 0.01
+PERTAMA:
+  Dokumen ini adalah dokumentasi dari man simulation v0.01 beta.
+  Dokumen ini berisi keterangan tentang perintah apa saja dan
+  bagaimana cara menulis sebuah dokumen manual yang didukung
+  oleh man simulation.
+  
+# 0.02
+PERINTAH:
+  Tidak banyak perintah yang didukung oleh man simulation v0.01
+  beta ini. Hanya beberapa perintah dasar saja yang dapat di
+  kenali.
+  
+  Perintah-perintah yang dikenali oleh man simulation adalah:
+    .TH - Perintah pada header yang akan digunakan sebagai
+          keterangan pada akhir dokumen.
+    .SH - Perintah yang digunakan untuk memformat kalimat
+          yang digunakan sebagai judul seksi.
+    .PP - Perintah untuk menyisipkan dua baris baru.
+    .BR - Perintah untuk menyisipkan satu baris baru.
+    .IP - Perintah untuk menyisipkan indentasi.
+    .B  - Perintah untuk memformat huruf menjadi tebal.
+    .I  - Perintah untuk memformat huruf menjadi miring.
+    ."  - Perintah untuk menyisipkan komentar. Kalimat
+          yang ditulis dibelakang perintah ini tidak akan
+          diproses dan akan diabaikan.
+          
+  Sebagai versi minimal, baru perintah diatas saja yang
+  dapat dikenali.
+
+# 0.03
+CONTOH:
+  Karena perintah yang dikenali sangat sedikit, jadi
+  untuk pembuatan halaman manualnya juga tergolong mudah.
+  
+  Berikut adalah contohnya:
+  
+   ." Penulisan header dokumen yang formatnya:
+   ." [nama_program] [nomor seksi] [tanggal] [pembuat] 
+   .TH foo 1 Jan-01-2011 cupucupu
+   ." berikut adalah format untuk judul seksi halaman
+   .SH NAME
+   ." format untuk indentasi
+   .IP
+   ." dan isi dari seksi
+   foo - Sebuah foo bar
+   ." tambah dua baris baru
+   .PP
+   .SH SYNOPSIS
+   .IP
+   ." jadikan karakter lebih tebal
+   .B foo
+   - perintah untuk menampilkan
+   ." jadikan karakter miring
+   .I foo bar
+   
+  Perintah harus dituliskan di awal baris dan tidak
+  diperbolehkan memberi spasi sebelum perintah karena
+  man simulation mendeteksi perintah dari awal kalimat
+  pada tiap barisnya.
+  
+# 0.04
+REFERENSI:
+  Sebagai referensi, kamu bisa mengunjungi beberapa
+  halaman berikut:
+  
+    http://www.linuxfocus.org/English/November2003/article309.shtml
+    http://www.schweikhardt.net/man_page_howto.html
+    http://web.cecs.pdx.edu/~trent/gnu/groff/groff.html
+    http://linuxreviews.org/man/groff/
+    http://www.ibm.com/developerworks/aix/tutorials/au-groff/section4.html
+    http://codingexperiments.com/how-to-write-papers-with-groff/
+    http://www.linuxhowtos.org/System/creatingman.htm
+    http://manpages.bsd.lv/
+    http://www.fnal.gov/docs/products/ups/ReferenceManual/html/manpages.html
+    
+# 0.05
+PENUTUP:
+  Semoga dokumentasi singkat ini berguna, :)
+  
+  Oleh: cupucupu <cupu.cupuh@yahoo.co.id>
+  
+  Februari 2011
+  
+  
+  

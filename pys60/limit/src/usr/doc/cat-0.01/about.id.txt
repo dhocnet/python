@@ -1,0 +1,22 @@
+cat simulation v0.01 beta
+
+cat simulation adalah sebuah program
+tiruan dari perintah unix yang dibuat
+untuk melengkapi program Limit.
+
+Pada versi awal ini hanya perintah
+dasar saja yang dapat dilakukan.
+Yaitu membaca file dan menampilkan
+hasilnya pada layar. Dan hanya teks
+murni yang dapat dibaca.
+
+Informasi untuk perintah cat pada Unix,
+silahkan merujuk pada halaman berikut:
+http://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html
+http://en.wikipedia.org/wiki/Cat_(Unix)
+
+Oleh:
+cupucupu <cupu.cupuh@yahoo.co.id>
+
+Diperbarui pada 24 Februari 2011
+

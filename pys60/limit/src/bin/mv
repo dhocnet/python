@@ -1,0 +1,77 @@
+#
+# mv simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+MVReadParam = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+MVGetParam = MVReadParam.read().split("^")
+MVReadParam.close()
+
+MVGetParam.pop(0)
+MVGetParam.pop(len(MVGetParam)-1)
+
+def MVBack():
+    LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+    LimitConsole()
+
+if len(MVGetParam) == 1:
+    LimitPrint.add(u"mv: missing file operand\nTry `man mv' for more information")
+    LimitConsole()
+elif len(MVGetParam) == 2:
+    LimitPrint.add(u"mv: missing destination operand after `%s'\nTry `man mv' for more information"%MVGetParam[1])
+    LimitConsole()
+else:
+    MVItem=[]
+    MVLen=len(MVGetParam)-1
+    MVLoop=1
+    while MVLoop <= MVLen:
+        if MVGetParam[MVLoop].startswith("'") or MVGetParam[MVLoop].startswith('"'):
+            MVMerge=''
+            while MVLoop <= MVLen:
+                if MVGetParam[MVLoop].startswith("'") or MVGetParam[MVLoop].startswith('"'):
+                    MVMerge+="%s "%MVGetParam[MVLoop][1:]
+                elif MVGetParam[MVLoop].endswith("'") or MVGetParam[MVLoop].endswith('"'):
+                    MVMerge+="%s"%MVGetParam[MVLoop][:-1]
+                    break
+                else:
+                    MVMerge+="%s "%MVGetParam[MVLoop]
+                MVLoop+=1
+            MVItem.append("%s"%MVMerge)
+        else:
+            MVItem.append("%s"%MVGetParam[MVLoop])
+        MVLoop+=1
+    if len(MVItem) == 1:
+        LimitPrint.add(u"mv: missing destination file operand after `%s'\nTry `man mv' for more information"%MVItem[0])
+        LimitConsole()
+    else:
+        if os.path.exists("%s%s"%(os.getcwd(),MVItem[0])) and not os.path.isdir("%s%s"%(os.getcwd(),MVItem[0])):
+            if os.path.exists("%s%s"%(os.getcwd(),MVItem[1])) and not os.path.isdir("%s%s"%(os.getcwd(),MVItem[1])):
+                if MVItem[0] == MVItem[1]:
+                    LimitPrint.add(u"mv: `%s' and `%s' are the same file"%(MVItem[0],MVItem[1]))
+                    LimitConsole()
+            elif os.path.exists("%s%s"%(os.getcwd(),MVItem[1])) and os.path.isdir("%s%s"%(os.getcwd(),MVItem[1])):
+                if not os.path.exists("%s%s\\%s"%(os.getcwd(),MVItem[1],MVItem[0])) :
+                    e32.file_copy("%s%s\\%s"%(os.getcwd(),MVItem[1],MVItem[0]),"%s%s"%(os.getcwd(),MVItem[0]))
+                    os.remove("%s%s"%(os.getcwd(),MVItem[0]))
+                    MVBack()
+                else:
+                    os.remove("%s%s\\%s"%(os.getcwd(),MVItem[1],MVItem[0]))
+                    e32.file_copy("%s%s\\%s"%(os.getcwd(),MVItem[1],MVItem[0]),"%s%s"%(os.getcwd(),MVItem[0]))
+                    os.remove("%s%s"%(os.getcwd(),MVItem[0]))
+                    MVBack()
+            else:
+                e32.file_copy("%s%s"%(os.getcwd(),MVItem[1]),"%s%s"%(os.getcwd(),MVItem[0]))
+                os.remove("%s%s"%(os.getcwd(),MVItem[0]))
+                MVBack()
+        elif os.path.exists("%s%s"%(os.getcwd(),MVItem[0])) and os.path.isdir("%s%s"%(os.getcwd(),MVItem[0])):
+            LimitPrint.add(u"mv: omitting directory `%s'"%MVItem[0])
+            LimitConsole()
+        else:
+            e32.file_copy("%s%s"%(os.getcwd(),MVItem[1]),"%s%s"%(os.getcwd(),MVItem[0]))
+            MVBack()
+            
+            
+            

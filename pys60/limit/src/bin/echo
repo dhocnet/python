@@ -1,0 +1,103 @@
+#
+# echo simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+ECHOReadFile = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+ECHOGetParam = ECHOReadFile.read().split("^")
+ECHOReadFile.close()
+
+ECHOGetParam.pop(0)
+ECHOGetParam.pop(len(ECHOGetParam)-1)
+
+def EBack():
+    LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+    LimitConsole()
+
+if len(ECHOGetParam)==1:
+    LimitConsole()
+else:
+    ECHOList=[]
+    ECHOQue=len(ECHOGetParam)-1
+    ECHOLoop=1
+    if ">" in ECHOGetParam and ECHOGetParam[-1] != ">":
+        ECHOMerge=''
+        while ECHOLoop<=ECHOQue:
+            if ECHOGetParam[ECHOLoop] != ">":
+                if ECHOGetParam[ECHOLoop].startswith("'") or ECHOGetParam[ECHOLoop].startswith('"'):
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop][1:]
+                elif ECHOGetParam[ECHOLoop].endswith("'") or ECHOGetParam[ECHOLoop].endswith('"'):
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop][:-1]
+                else:
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop]
+            else:
+                ECHOList.append("%s"%ECHOMerge)
+                ECHOList.append("%s"%ECHOGetParam[ECHOLoop])
+                ECHOList.append("%s"%ECHOGetParam[ECHOLoop+1])
+                break
+            ECHOLoop+=1
+        if os.path.exists("%s%s"%(os.getcwd(),ECHOList[-1])) and os.path.isdir("%s%s"%(os.getcwd(),ECHOList[-1])):
+            LimitPrint.add(u"bash: %s: Is a directory"%ECHOList[-1])
+            LimitConsole()
+        else:
+            EFopen=open("%s%s"%(os.getcwd(),ECHOList[-1]),'wb')
+            EList=len(ECHOList)-1
+            ELoop=0
+            while ELoop <= EList:
+                if ECHOList[ELoop] == ">":
+                    break
+                EFopen.write(u"%s"%ECHOList[ELoop])
+                ELoop+=1
+            EFopen.close()
+            EBack()
+    elif ">>" in ECHOGetParam and ECHOGetParam[-1] != ">>":
+        ECHOMerge=''
+        while ECHOLoop<=ECHOQue:
+            if ECHOGetParam[ECHOLoop] != ">>":
+                if ECHOGetParam[ECHOLoop].startswith("'") or ECHOGetParam[ECHOLoop].startswith('"'):
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop][1:]
+                elif ECHOGetParam[ECHOLoop].endswith("'") or ECHOGetParam[ECHOLoop].endswith('"'):
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop][:-1]
+                else:
+                    ECHOMerge+="%s "%ECHOGetParam[ECHOLoop]
+            else:
+                ECHOList.append("%s"%ECHOMerge)
+                ECHOList.append("%s"%ECHOGetParam[ECHOLoop])
+                ECHOList.append("%s"%ECHOGetParam[ECHOLoop+1])
+                break
+            ECHOLoop+=1
+        if os.path.exists("%s%s"%(os.getcwd(),ECHOList[-1])) and os.path.isdir("%s%s"%(os.getcwd(),ECHOList[-1])):
+            LimitPrint.add(u"bash: %s: Is a directory"%ECHOList[-1])
+            LimitConsole()
+        else:
+            EFopen=open("%s%s"%(os.getcwd(),ECHOList[-1]),'ab')
+            EList=len(ECHOList)-1
+            ELoop=0
+            while ELoop <= EList:
+                if ECHOList[ELoop] == ">>":
+                    break
+                EFopen.write(u"%s"%ECHOList[ELoop])
+                ELoop+=1
+            EFopen.close()
+            EBack()
+    elif ECHOGetParam[-1] == ">" or ECHOGetParam[-1] == ">>":
+        LimitPrint.add(u"bash: syntax error near unexpected token `newline'")
+        LimitConsole()
+    else:
+        ELen=len(ECHOGetParam)-1
+        ELop=1
+        while ELop <= ELen:
+            if ECHOGetParam[ELop].startswith("'") or ECHOGetParam[ELop].startswith('"'):
+                LimitPrint.add(u"%s "%ECHOGetParam[ELop][1:])
+            elif ECHOGetParam[ELop].endswith("'") or ECHOGetParam[ELop].endswith('"'):
+                LimitPrint.add(u"%s "%ECHOGetParam[ELop][:-1])
+            else:
+                LimitPrint.add(u"%s "%ECHOGetParam[ELop])
+            ELop+=1
+        LimitConsole()
+        
+        
+        

@@ -1,0 +1,106 @@
+#
+# ls simulation v0.01
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+LSCWD = os.getcwd()
+
+execfile("%s\\usr\\share\\mime\\compressed.types"%ROOT, globals())
+
+LSGETCMD = open("%s\\var\\run\\cmd.run"%ROOT, "r")
+LSSPLITCMD = LSGETCMD.read().split("^")
+LSGETCMD.close()
+LSSPLITCMD.pop(0)
+LSSPLITCMD.pop(len(LSSPLITCMD) - 1)
+
+if len(LSSPLITCMD) == 1:
+    LSCURRENT = os.listdir(LSCWD)
+    LSITEM = len(LSCURRENT) - 1
+    if len(LSCURRENT) == 0:
+        LimitPrint.delete(LimitPrint.len() - 1, LimitPrint.len())
+        LimitConsole()
+    else:
+        LSLOOP = 0
+        while LSLOOP <= LSITEM:
+            if os.path.isdir("%s%s"%(LSCWD,LSCURRENT[LSLOOP])):
+                LimitPrint.color = Blue
+                LimitPrint.add(u"%s/ "%LSCURRENT[LSLOOP])
+            elif LSCURRENT[LSLOOP].split(".")[-1].lower() in FileTypeCompress:
+                LimitPrint.color = Red
+                LimitPrint.add(u"%s "%LSCURRENT[LSLOOP])
+            else:
+                LimitPrint.add(u"%s "%LSCURRENT[LSLOOP])
+            LimitPrint.color = Gray
+            LSLOOP += 1
+        LimitConsole()
+else:
+    LSLOOP = 1
+    while LSLOOP <= len(LSSPLITCMD) - 1:
+        if LSSPLITCMD[LSLOOP].startswith("'") or LSSPLITCMD[LSLOOP].startswith('"'):
+            LSMerge = ''
+            while LSLOOP <= len(LSSPLITCMD)-1:
+                if LSSPLITCMD[LSLOOP].startswith("'") or LSSPLITCMD[LSLOOP].startswith('"'):
+                    LSMerge+="%s "%LSSPLITCMD[LSLOOP][1:]
+                elif LSSPLITCMD[LSLOOP].endswith("'") or LSSPLITCMD[LSLOOP].endswith('"'):
+                    LSMerge+="%s"%LSSPLITCMD[LSLOOP][:-1]
+                    break
+                else:
+                    LSMerge+="%s "%LSSPLITCMD[LSLOOP]
+                LSLOOP+=1
+            if os.path.exists("%s%s"%(os.getcwd(),str(LSMerge))) and os.path.isdir("%s%s"%(os.getcwd(),str(LSMerge))):
+                LimitPrint.add(u"%s:\n"%str(LSMerge))
+                LSMore = os.listdir(u"%s%s"%(os.getcwd(),str(LSMerge)))
+                LSLoopMore = 0
+                while LSLoopMore <= len(LSMore)-1:
+                    if os.path.exists("%s%s"%(os.getcwd(),str(LSMerge))) and os.path.isdir("%s%s"%(os.getcwd(),str(LSMerge))):
+                        LimitPrint.color = Blue
+                        LimitPrint.add(u"%s\ "%LSMore[LSLoopMore])
+                    elif LSMore[LSLoopMore].split(".")[1].lower() in FileTypeCompress:
+                        LimitPrint.color = Red
+                        LimitPrint.add(u"%s "%LSMore[LSLoopMore])
+                    else:
+                        LimitPrint.add(u"%s "%LSMore[LSLoopMore])
+                    if LSLoopMore == len(LSMore)-1:
+                        LimitPrint.add(u"\n")
+                    LimitPrint.color = Gray
+                    LSLoopMore+=1
+            elif os.path.exists("%s%s"%(os.getcwd(),str(LSMerge))) and LSMerge.split(".")[1].lower() in FileTypeCompress:
+                LimitPrint.color = Red
+                LimitPrint.add(u"%s\n"%str(LSMerge))
+            elif os.path.exists("%s%s"%(os.getcwd(),str(LSMerge))):
+                LimitPrint.add(u"%s\n"%str(LSMerge))
+            else:
+                LimitPrint.add(u"/bin/ls: cannot access %s: No such file or directory\n"%str(LSMerge))
+            LimitPrint.color = Gray
+        elif os.path.exists("%s%s"%(LSCWD,LSSPLITCMD[LSLOOP])) and os.path.isdir("%s%s"%(LSCWD,LSSPLITCMD[LSLOOP])):
+            LimitPrint.add(u"%s:\n"%LSSPLITCMD[LSLOOP])
+            LSMORE = os.listdir("%s%s"%(LSCWD,LSSPLITCMD[LSLOOP]))
+            LSLOOPMORE = 0
+            while LSLOOPMORE <= len(LSMORE) - 1:
+                if os.path.isdir("%s%s\\%s"%(LSCWD,LSSPLITCMD[LSLOOP],LSMORE[LSLOOPMORE])):
+                    LimitPrint.color = Blue
+                    LimitPrint.add(u"%s/ "%LSMORE[LSLOOPMORE])
+                elif LSMORE[LSLOOPMORE].split(".")[-1].lower() in FileTypeCompress:
+                    LimitPrint.color = Red
+                    LimitPrint.add(u"%s "%LSMORE[LSLOOPMORE])
+                else:
+                    LimitPrint.add(u"%s "%LSMORE[LSLOOPMORE])
+                if LSLOOPMORE == len(LSMORE) - 1:
+                    LimitPrint.add(u"\n")
+                LimitPrint.color = Gray
+                LSLOOPMORE += 1
+        elif os.path.exists("%s%s"%(LSCWD,LSSPLITCMD[LSLOOP])) and LSSPLITCMD[LSLOOP].split(".")[-1].lower() in FileTypeCompress:
+            LimitPrint.color = Red
+            LimitPrint.add(u"%s\n"%LSSPLITCMD[LSLOOP])
+        elif os.path.exists("%s%s"%(LSCWD,LSSPLITCMD[LSLOOP])):
+            LimitPrint.add(u"%s\n"%LSSPLITCMD[LSLOOP])
+        else:
+            LimitPrint.add(u"/bin/ls: cannot access %s: No such file or directory\n"%LSSPLITCMD[LSLOOP])
+        LimitPrint.color = Gray
+        LSLOOP += 1
+    LimitPrint.delete(LimitPrint.get_pos() - 1, LimitPrint.len())
+    LimitConsole()
+    

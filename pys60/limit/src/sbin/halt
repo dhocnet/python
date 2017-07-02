@@ -1,0 +1,23 @@
+#
+# halt simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+appuifw.app.title=u"system halt"
+LimitPrint.color = Red
+LimitPrint.add(u"The system is going down NOW!\n")
+e32.ao_sleep(0.1)
+LimitPrint.add(u"Sent SIGTERM to all proccesses\n")
+e32.ao_sleep(0.1)
+LimitPrint.add(u"Sent SIGKILL to all proccesses\n")
+e32.ao_sleep(0.1)
+LimitPrint.add(u"Requesting system halt\n")
+e32.ao_sleep(0.1)
+LimitPrint.add(u"System halted.")
+e32.ao_sleep(1)
+LIMITKERNEL.signal()
+appuifw.app.set_exit()
+

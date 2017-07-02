@@ -1,0 +1,145 @@
+#
+# man simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+manReadCmd = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+manGetCmd = manReadCmd.read().split("^")
+manReadCmd.close()
+
+manGetCmd.pop(0)
+manGetCmd.pop(len(manGetCmd)-1)
+
+def manCkCmd():
+    if len(manGetCmd) == 1:
+        LimitPrint.add(u"What manual page do you want?")
+        LimitConsole()
+    else:
+        global manFile, manTitle
+        manFile=''
+        manCk = manGetCmd[1]
+        if os.path.exists("%s\\usr\\man\\man1\\%s.1"%(ROOT,manCk)):
+            manFile="%s\\usr\\man\\man1\\%s.1"%(ROOT,manCk)
+            manTitle="%s(1)"%manCk
+            manRead()
+        elif os.path.exists("%s\\usr\\man\\man8\\%s.8"%(ROOT,manCk)):
+            manFile="%s\\usr\\man\\man8\\%s.8"%(ROOT,manCk)
+            manTitle="%s(8)"%manCk
+            manRead()
+        else:
+            manNoManual()
+            
+def manNoManual():
+    LimitPrint.add(u"No manual entry for %s"%manGetCmd[1])
+    LimitConsole()
+    
+def manQuit():
+    appuifw.app.body=LimitPrint
+    appuifw.app.exit_key_handler=LimitHalt
+    appuifw.app.menu=LimitDefMenu
+    LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+    LimitConsole()
+    
+def manRead():
+    global manFile, manTitle
+    appuifw.app.title=u"Processing..."
+    manOpen=open(manFile,"rb")
+    manList=manOpen.readlines()
+    manOpen.close()
+    manSc=appuifw.Text()
+    appuifw.app.body=manSc
+    manSc.color=Black
+    manSc.font="dense"
+    manSc.add(u"%s\t\tlimit manual\n"%manTitle)
+    appuifw.app.exit_key_handler=manQuit
+    appuifw.app.menu=[(u"Quit man pages...",manQuit)]
+    manLoop=0
+    manLen=len(manList)-1
+    manTH=[]
+    while manLoop <= manLen:
+        manMin=manList[manLoop][:-1]
+        if manMin.startswith(".TH"):
+            manHead=manMin.split(" ")
+            manHead.pop(0)
+            manHl=len(manHead)-1
+            manHo=0
+            manMerge=''
+            while manHo <= manHl:
+                if manHead[manHo].startswith('"'):
+                    while manHo <= manHl:
+                        if manHead[manHo].startswith('"'):
+                            manMerge+="%s "%manHead[manHo][1:]
+                        elif manHead[manHo].endswith('"'):
+                            manMerge+="%s"%manHead[manHo][:-1]
+                            manTH.append("%s"%manMerge)
+                            manMerge=''
+                        else:
+                            manMerge+="%s "%manHead[manHo]
+                        manHo+=1
+                else:
+                    manTH.append(u"%s"%manHead[manHo])
+                manHo+=1
+        elif manMin.startswith(".SH"):
+            manSc.add(u"\n")
+            manSc.font="title"
+            manSc.color=Green
+            manSH=manMin.split(" ")
+            manSH.pop(0)
+            manSHloop=0
+            manSHlen=len(manSH)-1
+            while manSHloop <= manSHlen:
+                manSc.add(u"%s "%manSH[manSHloop])
+                manSHloop+=1
+            manSc.font="dense"
+            manSc.add(u"\n")
+        elif manMin.startswith(".PP"):
+            manSc.add(u"\n\n")
+        elif manMin.startswith(".BR"):
+            manSc.add(u"\n")
+        elif manMin.startswith(".B"):
+            manSc.font="annotation"
+            manSc.color=Blue
+            manB=manMin.split(" ")
+            manB.pop(0)
+            manBloop=0
+            manBlen=len(manB)-1
+            while manBloop <= manBlen:
+                manSc.add(u"%s "%manB[manBloop])
+                manBloop+=1
+        elif manMin.startswith(".IP"):
+            manSc.add(u"\t")
+        elif manMin.startswith(".I"):
+            manSc.font=u"LatinPlain16"
+            manI=manMin.split(" ")
+            manI.pop(0)
+            manIloop=0
+            manIlen=len(manI)-1
+            while manIloop <= manIlen:
+                manSc.add(u"%s "%manI[manIloop])
+                manIloop+=1
+        elif manMin.startswith('."'):
+            continue
+        else:
+            manSrml=manMin.split(" ")
+            manSlen=len(manSrml)-1
+            manSloop=0
+            while manSloop <= manSlen:
+                manSc.add(u"%s "%manSrml[manSloop])
+                manSloop+=1
+        manSc.font="dense"
+        manSc.color=Black
+        manLoop+=1
+    if len(manTH) != 0:
+        manSc.add(u"\n\n____________________________\n")
+        if len(manTH) >= 2:
+            manSc.add(u"%s\t\t%s"%(manTH[-2],manTH[-1]))
+    manSc.add(u"\t%s"%manTitle)    
+    appuifw.app.title=u"man: %s"%manTitle
+    manSc.set_pos(0)
+    
+manCkCmd()
+
+

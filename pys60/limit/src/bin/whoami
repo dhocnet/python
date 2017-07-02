@@ -1,0 +1,10 @@
+#
+# whoami simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+
+LimitPrint.add(u"%s"%whoami)
+LimitConsole()

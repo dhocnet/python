@@ -1,0 +1,10 @@
+#
+# Limit about v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.com>
+#
+# Mar 2011
+#
+
+LimitPrint.add(u"Limit version 0.01 beta\n\nWrite using PyS60 v1.4.5 final\n\nBy: cupucupu <cupu.cupuh@yahoo.co.id>\nHome: http://sites.google.com/site/cuputoyz/pub/limit\n\nMarch 2011")
+LimitConsole()

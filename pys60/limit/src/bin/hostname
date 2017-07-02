@@ -1,0 +1,10 @@
+#
+# hostname simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+#
+
+LimitPrint.add(u"%s"%hostname)
+LimitConsole()
+

@@ -1,0 +1,98 @@
+#
+# rmdir simulation v0.01 beta
+#
+# by: cupucupu
+#
+# feb 2011
+#
+
+RMDIRReadDir = open("%s\\var\\run\\cmd.run"%ROOT,"r")
+RMDIRGetDir = RMDIRReadDir.read().split("^")
+RMDIRReadDir.close()
+
+RMDIRGetDir.pop(0)
+RMDIRGetDir.pop(len(RMDIRGetDir)-1)
+
+if len(RMDIRGetDir) == 1:
+    LimitPrint.add(u"rmdir: missing operand\nTry `man rmdir' for more information")
+    LimitConsole()
+else:
+    RMDIREntry = len(RMDIRGetDir)-1
+    RMDIRDelDir = 1
+    if len(RMDIRGetDir) == 2 and RMDIRGetDir[1] == "-v":
+        LimitPrint.add(u"rmdir: missing operand\nTry `man rmdir' for more information")
+        LimitConsole()
+    elif RMDIRGetDir[1] == "-v":
+        RMDIRVerbose = RMDIRDelDir + 1
+        while RMDIRVerbose <= RMDIREntry:
+            if RMDIRGetDir[RMDIRVerbose].startswith('"') or RMDIRGetDir[RMDIRVerbose].startswith("'"):
+                RMDIRMerge=''
+                while RMDIRVerbose <= RMDIREntry:
+                    if RMDIRGetDir[RMDIRVerbose].startswith("'") or RMDIRGetDir[RMDIRVerbose].startswith('"'):
+                        RMDIRMerge+="%s "%RMDIRGetDir[RMDIRVerbose][1:]
+                    elif RMDIRGetDir[RMDIRVerbose].endswith("'") or RMDIRGetDir[RMDIRVerbose].endswith('"'):
+                        RMDIRMerge+="%s"%RMDIRGetDir[RMDIRVerbose][:-1]
+                        break
+                    else:
+                        RMDIRMerge+="%s "%RMDIRGetDir[RMDIRVerbose]
+                    RMDIRVerbose+=1
+                if os.path.exists("%s%s"%(os.getcwd(),RMDIRMerge)) and os.path.isdir("%s%s"%(os.getcwd(),RMDIRMerge)):
+                    if len(os.listdir("%s%s"%(os.getcwd(),RMDIRMerge))) != 0:
+                        LimitPrint.add(u"rmdir: failed to remove `%s': Directory not empty\n"%RMDIRMerge)
+                    else:
+                        os.rmdir("%s%s"%(os.getcwd(),RMDIRMerge))
+                        LimitPrint.add(u"rmdir: removing directory `%s'\n"%RMDIRMerge)
+                elif os.path.exists("%s%s"%(os.getcwd(),RMDIRMerge)) and not os.path.isdir("%s%s"%(os.getcwd(),RMDIRMerge)):
+                    LimitPrint.add(u"rmdir: failed to remove `%s': Not a directory\n"%RMDIRMerge)
+                else:
+                    LimitPrint.add(u"rmdir: failed to remove `%s': No such file or directory\n"%RMDIRMerge)
+            elif os.path.exists("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRVerbose])) and os.path.isdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRVerbose])):
+                if len(os.listdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRVerbose]))) != 0:
+                    LimitPrint.add(u"rmdir: failed to remove `%s': Directory not empty\n"%RMDIRGetDir[RMDIRVerbose])
+                else:
+                    os.rmdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRVerbose]))
+                    LimitPrint.add(u"rmdir: removing directory, `%s'\n"%RMDIRGetDir[RMDIRVerbose])
+            elif os.path.exists("%s%s"%(os.getcwd(), RMDIRGetDir[RMDIRVerbose])) and not os.path.isdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRVerbose])):
+                LimitPrint.add(u"rmdir: failed to remove `%s': Not a directory\n"%RMDIRGetDir[RMDIRVerbose])
+            else:
+                LimitPrint.add(u"rmdir: failed to remove `%s': No such file or directory\n"%RMDIRGetDir[RMDIRVerbose])
+            RMDIRVerbose += 1
+        LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+        LimitConsole()
+    else:
+        while RMDIRDelDir <= RMDIREntry:
+            if RMDIRGetDir[RMDIRDelDir].startswith("'") or RMDIRGetDir[RMDIRDelDir].startswith('"'):
+                RMDIRMerge=''
+                while RMDIRDelDir <= RMDIREntry:
+                    if RMDIRGetDir[RMDIRDelDir].startswith("'") or RMDIRGetDir[RMDIRDelDir].startswith('"'):
+                        RMDIRMerge+="%s "%RMDIRGetDir[RMDIRDelDir][1:]
+                    elif RMDIRGetDir[RMDIRDelDir].endswith("'") or RMDIRGetDir[RMDIRDelDir].endswith('"'):
+                        RMDIRMerge+="%s"%RMDIRGetDir[RMDIRDelDir][:-1]
+                        break
+                    else:
+                        RMDIRMerge+="%s "%RMDIRGetDir[RMDIRDelDir]
+                    RMDIRDelDir+=1
+                if os.path.exists("%s%s"%(os.getcwd(),RMDIRMerge)) and os.path.isdir("%s%s"%(os.getcwd(),RMDIRMerge)):
+                    if len(os.listdir("%s%s"%(os.getcwd(),RMDIRMerge))) != 0:
+                        LimitPrint(u"rmdir: failed to remove `%s': Directory not empty\n"%RMDIRMerge)
+                    else:
+                        os.rmdir("%s%s"%(os.getcwd(),RMDIRMerge))
+                elif os.path.exists("%s%s"%(os.getcwd(),RMDIRMerge)) and not os.path.isdir("%s%s"%(os.getcwd(),RMDIRMerge)):
+                    LimitPrint.add(u"rmdir: failed to remove `%s': Not a directory\n"%RMDIRMerge)
+                else:
+                    LimitPrint.add(u"rmdir: failed to remove `%s': No such file or directory\n"%RMDIRMerge)
+            elif os.path.exists("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir])) and os.path.isdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir])):
+                if len(os.listdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir]))) != 0:
+                    LimitPrint.add(u"rmdir: failed to remove `%s': Directory not empty\n"%RMDIRGetDir[RMDIRDelDir])
+                else:
+                    os.rmdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir]))
+            elif os.path.exists("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir])) and not os.path.isdir("%s%s"%(os.getcwd(),RMDIRGetDir[RMDIRDelDir])):
+                LimitPrint.add(u"rmdir: failed to remove `%s': Not a directory\n"%RMDIRGetDir[RMDIRDelDir])
+            else:
+                LimitPrint.add(u"rmdir: failed to remove `%s': No such file or directory\n"%RMDIRGetDir[RMDIRDelDir])
+            RMDIRDelDir += 1
+        LimitPrint.delete(LimitPrint.len()-1,LimitPrint.len())
+        LimitConsole()
+
+
+

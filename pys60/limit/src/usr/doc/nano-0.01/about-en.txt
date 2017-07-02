@@ -1,0 +1,7 @@
+About nano simulation v0.01 beta
+
+nano simulation is a simple text editor designed to limit (linux miniatur). Written using python for s60 (pys60) programming language.
+
+By: cupucupu <cupu.cupuh@yahoo.co.id>
+Translation by Google <http://translate.google.com>
+Feb 18 2011

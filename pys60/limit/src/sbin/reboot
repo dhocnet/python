@@ -1,0 +1,21 @@
+#
+# reboot simulation v0.01 beta
+#
+# by: cupucupu <cupu.cupuh@yahoo.co.id>
+#
+# feb 2011
+#
+appuifw.app.title=u"system reboot"
+LimitPrint.color = Purple
+LimitPrint.add(u"Global message from root (reboot)\nrunning script /etc/rc.d/rc.6\n")
+LimitPrint.color = Black
+e32.ao_sleep(2)
+LimitPrint.add(u"Rebooting system...\n")
+e32.ao_sleep(1)
+appuifw.app.body.clear()
+LimitPrint.add(u"Booting up system...\n")
+e32.ao_sleep(2)
+appuifw.app.body.clear()
+os.chdir("%s\\%s"%(ROOT,whoami))
+LimitConsole()
+

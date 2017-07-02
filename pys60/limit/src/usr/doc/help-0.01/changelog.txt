@@ -1,0 +1,2 @@
+help simulation v0.01 beta
+-- diterbitkan pada feb 2011 
