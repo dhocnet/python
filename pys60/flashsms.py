@@ -4,7 +4,7 @@
 # tanggal   : maret, 2010
 #
 # script ini berfungsi untuk menampilkan pesan sms secara langsung seperti popup
-# pemberitahuan saat mekakses menu operator selular/ cek pulsa.
+# pemberitahuan saat mengakses menu operator selular/ cek pulsa.
 
 
 # pertama, import modul yang diperlukan 
