@@ -1,8 +1,0 @@
-MEMPERBAHARUI BERKAS
-
-Untuk memperbaharui berkas, pilih menu [Buka Berkas], pilih berkas yang ingin diperbaharui, klik [OK] dan pilih [Perbaharui Berkas].
-
-Setelah itu akan ditampilkan secara berurutan isi dari berkas yang dipilih dan Anda tinggal mengganti isinya sesuai dengan akun Anda yang baru.
-
-Dokumen oleh: cupucupu <desktop.hobbie@gmail.com>
-

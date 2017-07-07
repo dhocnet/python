@@ -1,2 +1,0 @@
-Maret 2011
-  Rilis awal. Belum ada perubahan yang dilakukan. Lihat file /Tree.txt untuk mengetahui file-file yang disertakan.
